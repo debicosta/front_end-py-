@@ -2,10 +2,9 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-from flask import Flask, request   
+import request   
 
-server = Flask(__name__)
-app = dash.Dash(__name__, server=server)
+app = dash.Dash()
 
 app.layout = html.Div([
     html.H1("Simple input example"),
@@ -33,10 +32,11 @@ app.layout = html.Div([
      Input('input-y', 'value')]
 )
 
-@server.route('/sum', methods=['GET'])
 def update_result(x, y):
-    result = request.get_json(force = TRUE)
-    return "The sum is: {}".format(result)
+    query = {'x':'x', 'y':'y'}
+    location="get_sum",
+    response = requests.get("http://"+ e + ":"+ p,  params=query)
+    return "The sum is: {}".format(response.json())
 
 
 if __name__ == '__main__':
