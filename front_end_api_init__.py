@@ -1,24 +1,24 @@
 import dash
 import dash_core_components as dcc
-import dash_html_components as html
+import dash import html
 from dash.dependencies import Input, Output
-import request   
+import requests   
 
 app = dash.Dash()
 
 app.layout = html.Div([
     html.H1("Simple input example"),
     dcc.Input(
-        id='input-x',
-        placeholder='Insert x value',
+        id='input-num1',
+        placeholder='Insert num1 value',
         type='number',
-        value='',
+        value='4',
     ),
     dcc.Input(
-        id='input-y',
-        placeholder='Insert y value',
+        id='input-num2',
+        placeholder='Insert num2 value',
         type='number',
-        value='',
+        value='3',
     ),
     html.Br(),
     html.Br(),
@@ -28,16 +28,17 @@ app.layout = html.Div([
 
 @app.callback(
     Output('result', 'children'),
-    [Input('input-x', 'value'),
-     Input('input-y', 'value')]
+    [Input('input-num1', 'value'),
+     Input('input-num2', 'value')]
 )
 
-def update_result(x, y):
-    query = {'x':'x', 'y':'y'}
-    location="get_sum",
-    response = requests.get("http://"+ e + ":"+ p,  params=query)
+def update_result(num1, num2):
+    sum_arguments = {'x': num1, 'y': num2}
+    url ='http://34.88.192:5000/get_sum'
+    response = requests.get(url = url,  params=sum_arguments)
+    print(response.url)
+    print(response.json())
     return "The sum is: {}".format(response.json())
 
-
 if __name__ == '__main__':
-     app.run_server(host = '0.0.0.0', port = 8050, debug = True, use_reloader=False)
+     app.run_server(host = '0.0.0.0', port = 8050, debug = True)
