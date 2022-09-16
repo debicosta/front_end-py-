@@ -1,8 +1,7 @@
 import dash
-import dash_core_components as dcc
-import dash import html
+from dash import dash, html, dcc
 from dash.dependencies import Input, Output
-import requests   
+import requests
 
 app = dash.Dash()
 
